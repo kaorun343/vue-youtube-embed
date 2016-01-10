@@ -1,0 +1,22 @@
+{
+  "extends": "eslint:recommended",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "mocha": true,
+    "node": true
+  },
+  "globals": {
+    "YT": true,
+    "Vue": true,
+    "VueYouTubeEmbeded": true,
+  },
+  "ecmaFeatures": {
+    "modules": true,
+    "classes": true
+  },
+  "rules": {
+    "semi": [2, "never"],
+    "no-console": 0
+  }
+}
