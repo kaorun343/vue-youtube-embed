@@ -2,16 +2,20 @@
   "name": "vue-youtube-embed",
   "version": "0.1.0",
   "description": "Vue.js and YouTube",
-  "main": "lib/vue-youtube-embeded.js",
+  "main": "lib/vue-youtube-embed.js",
   "scripts": {
     "lint": "eslint src/index.js",
-    "test": "karma start"
+    "test": "karma start",
+    "build": "webpack"
   },
   "directories": {
     "test": "test"
   },
+  "files": [
+    "lib"
+  ],
   "keywords": ["Vue.js", "vue", "YouTube", "youtube"],
-  "author": "",
+  "author": "kaorun343",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.4.0",

@@ -1,5 +1,8 @@
 'use strict'
 
+const webpack = require('webpack')
+const version = require('./package.json').version
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -13,5 +16,8 @@ module.exports = {
     loaders: [
       {test: /.\js$/, loader: 'babel?presets[]=es2015', exclude: /node_modules/}
     ]
-  }
+  },
+  plugins: [
+    new webpack.BannerPlugin(`Vue YouTube Embed version ${version} under MIT License copyright ${new Date().getFullYear()} kaorun343`)
+  ]
 }
