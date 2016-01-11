@@ -1,8 +1,8 @@
 'use strict'
 
-Vue.directive('youtube', VueYouTubeEmbeded)
-var events = VueYouTubeEmbeded.events
-Vue.use(VueYouTubeEmbeded)
+Vue.directive('youtube', VueYouTubeEmbed)
+var events = VueYouTubeEmbed.events
+Vue.use(VueYouTubeEmbed)
 
 window.app = new Vue({
   el: '#app',

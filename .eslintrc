@@ -9,7 +9,7 @@
   "globals": {
     "YT": true,
     "Vue": true,
-    "VueYouTubeEmbeded": true,
+    "VueYouTubeEmbed": true,
   },
   "ecmaFeatures": {
     "modules": true,
