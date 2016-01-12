@@ -7,7 +7,9 @@ window.app = new Vue({
   data: {
     videoId: 'M7lc1UVf-VE',
     nextId: '',
-    videos: []
+    videos: [],
+    width: '640',
+    height: '390'
   },
   events: {
     [events.READY]: function(player) {
@@ -37,7 +39,7 @@ window.app = new Vue({
   components: {
     VideoList: {
       props: ['video'],
-      template: '<div><h2>video: {{video}}</h2><div v-youtube="video"></div></div>'
+      template: '<div><h2>video: {{video}}</h2><div v-youtube.url="video"></div></div>'
     }
   }
 })

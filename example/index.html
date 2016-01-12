@@ -9,15 +9,25 @@
   <div id="app" class="row column">
     <h1>Vue YouTube Embed</h1>
     <div>
-      <h2>play === false (#cueVideoById)</h2>
+      <h2>default value (#cueVideoById)</h2>
       <div v-youtube="videoId"></div>
     </div>
     <div>
-      <h2>play === true (#loadVideoById)</h2>
-      <div v-youtube="videoId" :play="true"></div>
+      <h2>playerVars: {autoplay: 1, start: 30} (#loadVideoById)</h2>
+      <div class="row">
+        <fieldset class="small-6 columns">
+          <label for="width">Width</label>
+          <input type="number" name="width" id="width" v-model="width">
+        </fieldset>
+        <fieldset class="small-6 columns">
+          <label for="height">Height</label>
+          <input type="number" name="height" id="height" v-model="height">
+        </fieldset>
+      </div>
+      <div v-youtube="videoId" :width="width" :height="height" :player-vars="{autoplay: 1, start: 30}"></div>
     </div>
     <div>
-      <label for="nextId">add a video id</label>
+      <label for="nextId">add a video id or an URL of YouTube</label>
       <input id="nextId" type="text" v-model="nextId">
       <div class="button-group">
         <button class="button" @click="next">next video</button>

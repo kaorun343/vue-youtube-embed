@@ -44,7 +44,7 @@ These are the events that will be emitted by the directive.
   </div>
   <div>
     <h2>add params</h2>
-    <div v-youtube="videoId" width="1280" height="750" :play="true"></div>
+    <div v-youtube.url="videoId" width="1280" height="750" :player-vars="{autoplay: 1}"></div>
   </div>
 </div>
 ```

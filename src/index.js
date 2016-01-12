@@ -62,26 +62,28 @@ export function getTimeFromURL(url = "") {
   return seconds + (minutes * 60)
 }
 
-let container = {
+export const container = {
   scripts: [],
   ready: false,
 
-  run() {
+  run(YouTube) {
     this.scripts.forEach((callback) => {
-      callback(YT)
+      callback(YouTube)
     })
     this.ready = true
+    this.YouTube = YouTube
     this.scripts = []
   },
 
   register(callback) {
     if (this.ready) {
       this.Vue.nextTick(() => {
-        callback(YT)
+        callback(this.YouTube)
       })
     } else {
       this.scripts.push(callback)
     }
+    console.log(this)
   }
 }
 
@@ -103,24 +105,41 @@ const _events = {
   5: events.QUEUED
 }
 
+function setSize() {
+  let {width = '640', height = '390'} = this.params
+  this.player.setSize(width, height)
+}
+
 let pid = 0
 
-export const YouTube = {
-  params: ['width', 'height', 'play'],
+export const YouTubePlayer = {
+  params: ['width', 'height', 'player-vars'],
+  paramWatchers: {
+    width: setSize,
+    height: setSize
+  },
   bind() {
-    this.el.id = `v-youtube-player-${pid}`
+    this.el.id = this.el.id || `v-youtube-player-${pid}`
     pid += 1
     this.player = null
   },
   update(videoId) {
+    let start = 0
+    if (this.modifiers.url) {
+      start = getTimeFromURL(videoId)
+      videoId = getIdFromURL(videoId)
+    }
+
     if (this.player === null) {
       container.register((YouTube) => {
-        let {width = '640', height = '390'} = this.params
+        let {width = '640', height = '390', playerVars = {}} = this.params
+        playerVars.start = playerVars.start || start
         const vm = this.vm
         this.player = new YouTube.Player(this.el.id, {
           width,
           height,
           videoId,
+          playerVars,
           events: {
             onReady(event) {
               vm.$emit(events.READY, event.target)
@@ -129,12 +148,16 @@ export const YouTube = {
               if (event.data !== -1) {
                 vm.$emit(_events[event.data], event.target)
               }
+            },
+            onError(event) {
+              vm.$emit(events.ERROR, event.target)
             }
           }
         })
       })
     } else {
-      const name = `${this.params.play ? 'load' : 'cue'}VideoById`
+      const {playerVars = {autoplay: 0}} = this.params
+      const name = `${playerVars.autoplay ? 'load' : 'cue'}VideoById`
       this.player[name](videoId)
     }
   },
@@ -146,12 +169,16 @@ export const YouTube = {
 
 export function install(Vue) {
   container.Vue = Vue
-  Vue.directive('youtube', YouTube)
+  Vue.directive('youtube', YouTubePlayer)
+  Vue.prototype.$getIdFromURL = getIdFromURL
+  Vue.prototype.$getTimeFromURL = getTimeFromURL
+
   const tag = document.createElement('script')
   tag.src = "https://www.youtube.com/player_api"
   const firstScriptTag = document.getElementsByTagName('script')[0]
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+
   window.onYouTubeIframeAPIReady = function() {
-    container.run()
+    container.run(YT)
   }
 }
