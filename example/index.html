@@ -35,7 +35,7 @@
       </div>
     </div>
     <hr>
-    <div v-for="video in videos"><video-list :video="video"></video-list></div>
+    <div><video-list v-for="video in videos" :video="video.videoId"></video-list></div>
   </div>
   <script src="../node_modules/vue/dist/vue.min.js" charset="utf-8"></script>
   <script src="../lib/vue-youtube-embed.js" charset="utf-8"></script>

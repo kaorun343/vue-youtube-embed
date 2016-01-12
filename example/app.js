@@ -32,7 +32,7 @@ window.app = new Vue({
       this.nextId = ''
     },
     add() {
-      this.videos.push(this.nextId)
+      this.videos.push({videoId: this.nextId})
       this.nextId = ''
     }
   },
