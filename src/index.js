@@ -1,4 +1,12 @@
 'use strict'
+
+if (!String.prototype.includes) {
+  String.prototype.includes = function() {
+    'use strict'
+    return String.prototype.indexOf.apply(this, arguments) !== -1
+  }
+}
+
 const youtubeRegexp = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*[^\w\s-])([\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig
 const timeRegexp = /t=(\d+)[ms]?(\d+)?s?/
 

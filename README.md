@@ -12,7 +12,6 @@ npm install --save vue-youtube-embed
 
 ## Requirement
 * Vue.js
-* [String.prototype.includes()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
 
 ## How to Use
 Please pass the ID of the video that you'd like to show.
@@ -66,7 +65,7 @@ const app = new Vue({
   },
   events: {
     // when player is ready, the directive emit 'events.READY'
-    // "player" is instance of YT.Player
+    // "player" is an instance of YT.Player
     [events.READY]: function(player) {
       // I think it's good to add the player to the component directly.
       // You shouldn't use "this.$set" or prepare the key at "data"
