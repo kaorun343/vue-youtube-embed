@@ -2,18 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Test</title>
+  <title>Vue YouTube Embed Example</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.1/foundation.min.css">
 </head>
 <body>
-  <div id="app">
-    <div v-youtube="videoId" ready="onready" width="640" height="390"></div>
+  <div id="app" class="row column">
+    <h1>Vue YouTube Embed</h1>
     <div>
-      <input type="text" v-model="nextId">
-      <button @click="next">next</button>
-      <button @click="add">add</button>
+      <h2>play === false (#cueVideoById)</h2>
+      <div v-youtube="videoId"></div>
+    </div>
+    <div>
+      <h2>play === true (#loadVideoById)</h2>
+      <div v-youtube="videoId" :play="true"></div>
+    </div>
+    <div>
+      <label for="nextId">add a video id</label>
+      <input id="nextId" type="text" v-model="nextId">
+      <div class="button-group">
+        <button class="button" @click="next">next video</button>
+        <button class="button" @click="add">add video</button>
+      </div>
     </div>
     <hr>
-    <div v-for="video in videos"><video-list :video="video.id"></video-list></div>
+    <div v-for="video in videos"><video-list :video="video"></video-list></div>
   </div>
   <script src="../node_modules/vue/dist/vue.min.js" charset="utf-8"></script>
   <script src="../lib/vue-youtube-embed.js" charset="utf-8"></script>

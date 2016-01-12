@@ -1,8 +1,6 @@
 'use strict'
-
-Vue.directive('youtube', VueYouTubeEmbed)
-var events = VueYouTubeEmbed.events
 Vue.use(VueYouTubeEmbed)
+var events = VueYouTubeEmbed.events
 
 window.app = new Vue({
   el: '#app',
@@ -12,15 +10,15 @@ window.app = new Vue({
     videos: []
   },
   events: {
-    [events.READY]: function(event, player) {
-      console.log(events.READY, event, player)
+    [events.READY]: function(player) {
+      console.log(events.READY, player)
       this.player = player
     },
-    [events.PLAYING]: function(event, player) {
-      console.log(events.PLAYING, event, player)
+    [events.PLAYING]: function(player) {
+      console.log(events.PLAYING, player)
     },
-    [events.ENDED]: function(event, player) {
-      console.log(events.ENDED, event, player)
+    [events.ENDED]: function(player) {
+      console.log(events.ENDED, player)
     }
   },
   methods: {
@@ -32,7 +30,7 @@ window.app = new Vue({
       this.nextId = ''
     },
     add() {
-      this.videos.push({id: this.nextId})
+      this.videos.push(this.nextId)
       this.nextId = ''
     }
   },

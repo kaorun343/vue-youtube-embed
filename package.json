@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint src/index.js",
     "test": "karma start",
-    "build": "webpack"
+    "build": "webpack",
+    "prepublish": "npm run build"
   },
   "directories": {
     "test": "test"

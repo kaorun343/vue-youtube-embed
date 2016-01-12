@@ -54,23 +54,21 @@ export function getTimeFromURL(url = "") {
   return seconds + (minutes * 60)
 }
 
-let _Vue
-class Container {
-  constructor() {
-    this.scripts = []
-    this.ready = false
-  }
+let container = {
+  scripts: [],
+  ready: false,
 
   run() {
     this.scripts.forEach((callback) => {
       callback(YT)
     })
+    this.ready = true
     this.scripts = []
-  }
+  },
 
   register(callback) {
     if (this.ready) {
-      _Vue.nextTick(function() {
+      this.Vue.nextTick(() => {
         callback(YT)
       })
     } else {
@@ -78,8 +76,6 @@ class Container {
     }
   }
 }
-
-const container = new Container()
 
 export const events = {
   READY: 'youtube.player.ready',
@@ -91,7 +87,7 @@ export const events = {
   ERROR: 'youtube.player.error'
 }
 
-const _evnets = {
+const _events = {
   0: events.ENDED,
   1: events.PLAYING,
   2: events.PAUSED,
@@ -99,39 +95,39 @@ const _evnets = {
   5: events.QUEUED
 }
 
-let cid = 0
+let pid = 0
 
 export const YouTube = {
-  params: ['width', 'height'],
+  params: ['width', 'height', 'play'],
   bind() {
-    cid += 1
-    this.el.id = `v-youtube-player-${cid}`
+    this.el.id = `v-youtube-player-${pid}`
+    pid += 1
     this.player = null
   },
   update(videoId) {
     if (this.player === null) {
       container.register((YouTube) => {
         let {width = '640', height = '390'} = this.params
-        const self = this
+        const vm = this.vm
         this.player = new YouTube.Player(this.el.id, {
           width,
           height,
           videoId,
           events: {
             onReady(event) {
-              self.vm.$emit(events.READY, event, self.player)
+              vm.$emit(events.READY, event.target)
             },
             onStateChange(event) {
               if (event.data !== -1) {
-                self.vm.$emit(_evnets[event.data], event, self.player)
+                vm.$emit(_events[event.data], event.target)
               }
             }
           }
         })
-        console.log('#update', this.player)
       })
     } else {
-      this.player.loadVideoById(videoId)
+      const name = `${this.params.play ? 'load' : 'cue'}VideoById`
+      this.player[name](videoId)
     }
   },
   unbind() {
@@ -141,7 +137,7 @@ export const YouTube = {
 }
 
 export function install(Vue) {
-  _Vue = Vue
+  container.Vue = Vue
   Vue.directive('youtube', YouTube)
   const tag = document.createElement('script')
   tag.src = "https://www.youtube.com/player_api"
@@ -149,6 +145,5 @@ export function install(Vue) {
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
   window.onYouTubeIframeAPIReady = function() {
     container.run()
-    container.ready = true
   }
 }
