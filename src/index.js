@@ -88,13 +88,13 @@ export const container = {
 }
 
 export const events = {
-  READY: 'youtube.player.ready',
-  ENDED: 'youtube.player.ended',
-  PLAYING: 'youtube.player.playing',
-  PAUSED: 'youtube.player.paused',
-  BUFFERING: 'youtube.player.buffering',
-  QUEUED: 'youtube.player.queued',
-  ERROR: 'youtube.player.error'
+  READY: 'youtube:player:ready',
+  ENDED: 'youtube:player:ended',
+  PLAYING: 'youtube:player:playing',
+  PAUSED: 'youtube:player:paused',
+  BUFFERING: 'youtube:player:buffering',
+  QUEUED: 'youtube:player:queued',
+  ERROR: 'youtube:player:error'
 }
 
 const _events = {

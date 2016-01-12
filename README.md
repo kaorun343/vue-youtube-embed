@@ -26,13 +26,13 @@ These are available params.
 * play: whether play video when videoId is changed, default value is `false`
 
 These are the events that will be emitted by the directive.
-* `READY`: 'youtube.player.ready',
-* `ENDED`: 'youtube.player.ended',
-* `PLAYING`: 'youtube.player.playing',
-* `PAUSED`: 'youtube.player.paused',
-* `BUFFERING`: 'youtube.player.buffering',
-* `QUEUED`: 'youtube.player.queued',
-* `ERROR`: 'youtube.player.error'
+* `READY`: 'youtube:player:ready',
+* `ENDED`: 'youtube:player:ended',
+* `PLAYING`: 'youtube:player:playing',
+* `PAUSED`: 'youtube:player:paused',
+* `BUFFERING`: 'youtube:player:buffering',
+* `QUEUED`: 'youtube:player:queued',
+* `ERROR`: 'youtube:player:error'
 
 ## Example
 
@@ -75,7 +75,7 @@ const app = new Vue({
     // the directive check the state and emit 'events.PLAYING' or else
     [events.PLAYING]: function(player) {
     },
-    'youtube.player.ended': function(player) {
+    'youtube:player:ended': function(player) {
     }
   },
   methods: {
