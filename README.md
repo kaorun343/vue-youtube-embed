@@ -3,36 +3,80 @@ This is a directive for Vue.js to utilize YouTube iframe API easily.
 This is based on [Angular YouTube Embed](http://brandly.github.io/angular-youtube-embed/)
 
 ## License
-[MIT License](http://opensource.org/licenses/mit-license.php)
+MIT License
 
 ## install
-```
+```bash
 npm install --save vue-youtube-embed
+```
+
+```js
+'use strict'
+import Vue from 'vue'
+import VueYouTubeEmbed from 'vue-youtube-embed'
+Vue.use(VueYouTubeEmbed)
 ```
 
 ## Requirement
 * Vue.js
 
-## How to Use
+## Usage
+
+### Directive and Modifiers
 Please pass the ID of the video that you'd like to show.
-`getIdFromURL` is available when you'd like to get the ID from url.
-This function is the same as the original one. Also, `getTimeFromURL` is the same  as the original one, too.
 
-Currently, `width` and `height` is available to pass to the directive.
-Please pass them as `String`.
+```html
+<div v-youtube="videoId"></div>
+<div v-youtube.literal="rawVideoId"></div>
+```
+However, you can pass the url of the video instead of the id like this.
+The url can include start time.
+
+```html
+<div v-youtube.url="videoUrl"></div>
+<div v-youtube.url.literal="rawVideoUrl"></div>
+```
+
+### Params
 These are available params.
-* width: default value is `640`
-* height: String, default value is `390`
-* play: whether play video when videoId is changed, default value is `false`
+* `width`: `String`, default value is `640`
+* `height`: `String`, default value is `390`
+* `playerVars`: `Object`, default value is `{start: 0}`
 
+### Methods
+These functions are the same as the original one.
+* `getIdFromURL`
+* `getTimeFromURL`
+
+```js
+'use strict'
+import VueYouTubeEmbed from 'vue-youtube-embed'
+let videoId = VueYouTubeEmbed.getIdFromURL(url)
+let startTime = VueYouTubeEmbed.getTimeFromURL(url)
+```
+
+or
+```js
+'use strict'
+export default {
+  methods: {
+    method(url) {
+      this.videoId = this.$youtube.getIdFromURL(url)
+      this.startTime = this.$youtube.getTimeFromURL(url)
+    }
+  }
+}
+```
+
+### Events
 These are the events that will be emitted by the directive.
-* `READY`: 'youtube:player:ready',
-* `ENDED`: 'youtube:player:ended',
-* `PLAYING`: 'youtube:player:playing',
-* `PAUSED`: 'youtube:player:paused',
-* `BUFFERING`: 'youtube:player:buffering',
-* `QUEUED`: 'youtube:player:queued',
-* `ERROR`: 'youtube:player:error'
+* `READY`: `youtube:player:ready`
+* `ENDED`: `youtube:player:ended`
+* `PLAYING`: `youtube:player:playing`
+* `PAUSED`: `youtube:player:paused`
+* `BUFFERING`: `youtube:player:buffering`
+* `QUEUED`: `youtube:player:queued`
+* `ERROR`: `youtube:player:error`
 
 ## Example
 
@@ -44,24 +88,29 @@ These are the events that will be emitted by the directive.
   </div>
   <div>
     <h2>add params</h2>
-    <div v-youtube.url="videoId" width="1280" height="750" :player-vars="{autoplay: 1}"></div>
+    <div v-youtube="videoId" width="1280" height="750" :player-vars="{autoplay: 1}"></div>
+  </div>
+  <div>
+    <h2>url instead of video url</h2>
+    <div v-youtube.url="videoUrl"></div>
   </div>
 </div>
 ```
 
 ```js
+'use strict'
 import Vue from 'vue'
 import VueYouTubeEmbed from 'vue-youtube-embed'
 Vue.use(VueYouTubeEmbed)
 
-const {events, getIdFromURL} = VueYouTubeEmbed
-let videoId = getIdFromURL(someYouTubeUrl)
+const {events} = VueYouTubeEmbed
 
 
 const app = new Vue({
   el: '#app',
   data: {
-    videoId: videoId
+    videoId: 'videoId',
+    videoUrl: 'https://youtu.be/videoId?t=20s'
   },
   events: {
     // when player is ready, the directive emit 'events.READY'
@@ -93,5 +142,5 @@ const app = new Vue({
 })
 ```
 
-## Development
-* contribution welcome
+## Contribution
+* contribution welcome!

@@ -10,6 +10,7 @@
     "YT": true,
     "Vue": true,
     "VueYouTubeEmbed": true,
+    "sinon": true
   },
   "ecmaFeatures": {
     "modules": true,

@@ -15,7 +15,12 @@
   "files": [
     "lib"
   ],
-  "keywords": ["Vue.js", "vue", "YouTube", "youtube"],
+  "keywords": [
+    "Vue.js",
+    "vue",
+    "YouTube",
+    "youtube"
+  ],
   "author": "kaorun343",
   "license": "MIT",
   "devDependencies": {
@@ -32,9 +37,11 @@
     "karma-cli": "^0.1.2",
     "karma-mocha": "^0.2.1",
     "karma-mocha-reporter": "^1.1.3",
+    "karma-sinon": "^1.0.4",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.3.4",
     "power-assert": "^1.2.0",
+    "sinon": "^1.17.2",
     "vue": "^1.0.13",
     "webpack": "^1.12.10"
   },

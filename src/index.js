@@ -64,26 +64,22 @@ export function getTimeFromURL(url = "") {
 
 export const container = {
   scripts: [],
-  ready: false,
 
-  run(YouTube) {
+  run() {
     this.scripts.forEach((callback) => {
-      callback(YouTube)
+      callback(this.YT)
     })
-    this.ready = true
-    this.YouTube = YouTube
     this.scripts = []
   },
 
   register(callback) {
-    if (this.ready) {
+    if (this.YT) {
       this.Vue.nextTick(() => {
-        callback(this.YouTube)
+        callback(this.YT)
       })
     } else {
       this.scripts.push(callback)
     }
-    console.log(this)
   }
 }
 
@@ -170,8 +166,7 @@ export const YouTubePlayer = {
 export function install(Vue) {
   container.Vue = Vue
   Vue.directive('youtube', YouTubePlayer)
-  Vue.prototype.$getIdFromURL = getIdFromURL
-  Vue.prototype.$getTimeFromURL = getTimeFromURL
+  Vue.prototype.$youtube = {getIdFromURL, getTimeFromURL}
 
   const tag = document.createElement('script')
   tag.src = "https://www.youtube.com/player_api"
@@ -179,6 +174,7 @@ export function install(Vue) {
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
 
   window.onYouTubeIframeAPIReady = function() {
-    container.run(YT)
+    container.YT = YT
+    container.run()
   }
 }
