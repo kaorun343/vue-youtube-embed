@@ -178,3 +178,7 @@ export function install(Vue) {
     container.run()
   }
 }
+
+export default {
+   getIdFromURL, getTimeFromURL, YouTubePlayer, install
+}
