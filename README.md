@@ -142,5 +142,16 @@ const app = new Vue({
 })
 ```
 
+## Projects without webpack
+If you are not using webpack you need to import the plugin as follows:
+
+```js
+import {install as VouYoutubeEmbed} from 'vue-youtube-embed'
+Vue.use(VouYoutubeEmbed)
+
+...
+```
+
+
 ## Contribution
 * contribution welcome!
