@@ -1,6 +1,6 @@
 {
   "name": "vue-youtube-embed",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Vue.js and YouTube",
   "main": "lib/vue-youtube-embed.js",
   "scripts": {
