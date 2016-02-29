@@ -100,11 +100,9 @@ These are the events that will be emitted by the directive.
 ```js
 'use strict'
 import Vue from 'vue'
-import VueYouTubeEmbed from 'vue-youtube-embed'
+import VueYouTubeEmbed, { events } from 'vue-youtube-embed'
+
 Vue.use(VueYouTubeEmbed)
-
-const {events} = VueYouTubeEmbed
-
 
 const app = new Vue({
   el: '#app',
