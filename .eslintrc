@@ -12,9 +12,9 @@
     "VueYouTubeEmbed": true,
     "sinon": true
   },
-  "ecmaFeatures": {
-    "modules": true,
-    "classes": true
+  "parserOptions": {
+    "classes": true,
+    "sourceType": "module"
   },
   "rules": {
     "semi": [2, "never"],
