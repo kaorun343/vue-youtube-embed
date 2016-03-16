@@ -159,7 +159,7 @@ export const YouTubePlayer = {
   },
   unbind() {
     if(this.player != null) {
-        this.player.destroy();
+        this.player.destroy()
     }
     delete this.player
   }
