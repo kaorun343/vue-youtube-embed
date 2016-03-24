@@ -1,6 +1,7 @@
 # Vue YouTube Embed
 This is a directive for Vue.js to utilize YouTube iframe API easily.
 This is based on [Angular YouTube Embed](http://brandly.github.io/angular-youtube-embed/)
+As you can see, in this repository doesn't include compiled file, but in the npm package of this, it is included.
 
 ## License
 MIT License
