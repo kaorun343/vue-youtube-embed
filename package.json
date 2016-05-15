@@ -42,7 +42,7 @@
     "mocha": "^2.4.5",
     "power-assert": "^1.2.0",
     "sinon": "^1.17.3",
-    "vue": "^1.0.17",
+    "vue": "^1.0.24",
     "webpack": "^1.12.14"
   },
   "dependencies": {},
