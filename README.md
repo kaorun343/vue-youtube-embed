@@ -1,5 +1,5 @@
 # Vue YouTube Embed
-This is a directive for Vue.js to utilize YouTube iframe API easily.
+This is a component for Vue.js to utilize YouTube iframe API easily.
 This is based on [Angular YouTube Embed](http://brandly.github.io/angular-youtube-embed/)
 As you can see, in this repository doesn't include compiled file, but in the npm package of this, it is included.
 
@@ -22,27 +22,19 @@ Vue.use(VueYouTubeEmbed)
 * Vue.js
 
 ## Usage
-
-### Directive and Modifiers
 Please pass the ID of the video that you'd like to show.
 
 ```html
-<div v-youtube="videoId"></div>
-<div v-youtube.literal="rawVideoId"></div>
-```
-However, you can pass the url of the video instead of the id like this.
-The url can include start time.
-
-```html
-<div v-youtube.url="videoUrl"></div>
-<div v-youtube.url.literal="rawVideoUrl"></div>
+<youtube :video-id="videoId"></youtube>
 ```
 
-### Params
-These are available params.
-* `width`: `String`, default value is `640`
-* `height`: `String`, default value is `390`
-* `playerVars`: `Object`, default value is `{start: 0}`
+### Props
+
+These are available props.
+* `player-width`: `String`, default value is `640`
+* `player-height`: `String`, default value is `390`
+* `player-vars`: `Object`, default value is `{start: 0, autoplay: 0}`
+* `video-id`: `String`, `required`
 
 ### Methods
 These functions are the same as the original one.
@@ -70,31 +62,29 @@ export default {
 ```
 
 ### Events
-These are the events that will be emitted by the directive.
-* `READY`: `youtube:player:ready`
-* `ENDED`: `youtube:player:ended`
-* `PLAYING`: `youtube:player:playing`
-* `PAUSED`: `youtube:player:paused`
-* `BUFFERING`: `youtube:player:buffering`
-* `QUEUED`: `youtube:player:queued`
-* `ERROR`: `youtube:player:error`
+These are the events that will be emitted by the component.
+* `ready`
+* `ended`
+* `playing`
+* `paused`
+* `buffering`
+* `queued`
+* `error`
+
+The first argument is an instance of `YT.Player`.
 
 ## Example
 
 ```html
 <div id="#app">
-  <div>
-    <h2>normal</h2>
-    <div v-youtube="videoId"></div>
-  </div>
-  <div>
-    <h2>add params</h2>
-    <div v-youtube="videoId" width="1280" height="750" :player-vars="{autoplay: 1}"></div>
-  </div>
-  <div>
-    <h2>url instead of video url</h2>
-    <div v-youtube.url="videoUrl"></div>
-  </div>
+  <section>
+    <h2>listening events</h2>
+    <youtube :video-id="videoId" @ready="ready" @playing="playing"></youtube>
+  </section>
+  <section>
+    <h2>add options</h2>
+    <youtube :video-id="videoId" player-width="1280" player-height="750" :player-vars="{autoplay: 1}"></youtube>
+  </section>
 </div>
 ```
 
@@ -109,26 +99,19 @@ const app = new Vue({
   el: '#app',
   data: {
     videoId: 'videoId',
-    videoUrl: 'https://youtu.be/videoId?t=20s'
-  },
-  events: {
-    // when player is ready, the directive emit 'events.READY'
-    // "player" is an instance of YT.Player
-    [events.READY]: function(player) {
-      // I think it's good to add the player to the component directly.
-      // You shouldn't use "this.$set" or prepare the key at "data"
-      this.player = player
-    },
-    // when player's state is changed,
-    // the directive check the state and emit 'events.PLAYING' or else
-    [events.PLAYING]: function(player) {
-    },
-    'youtube:player:ended': function(player) {
-    }
   },
   methods: {
+    ready(player) {
+      this.player = player
+    },
+    playing(player) {
+      // The player is playing a video.
+    },
     change() {
       // when you change the value, the player will also change.
+      // If you would like to change `playerVars`, please change it before you change `videoId`.
+      // If `playerVars.autoplay` is 1, `loadVideoById` will be called.
+      // If `playerVars.autoplay` is 0, `cueVideoById` will be called.
       this.videoId = 'another video id'
     },
     stop() {
@@ -139,16 +122,6 @@ const app = new Vue({
     }
   }
 })
-```
-
-## Projects without webpack
-If you are not using webpack you need to import the plugin as follows:
-
-```js
-import {install as VouYoutubeEmbed} from 'vue-youtube-embed'
-Vue.use(VouYoutubeEmbed)
-
-...
 ```
 
 
