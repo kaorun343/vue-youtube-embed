@@ -1,12 +1,21 @@
 # Vue YouTube Embed
 This is a component for Vue.js to utilize YouTube iframe API easily.
 This is based on [Angular YouTube Embed](http://brandly.github.io/angular-youtube-embed/)
-As you can see, in this repository doesn't include compiled file, but in the npm package of this, it is included.
 
 ## License
 MIT License
 
 ## install
+
+```html
+<script src="vue-youtube-embed.js"></script>
+<script>
+Vue.use(VueYouTubeEmbed)
+</script>
+```
+
+or
+
 ```bash
 npm install --save vue-youtube-embed
 ```
@@ -42,15 +51,12 @@ These functions are the same as the original one.
 * `getTimeFromURL`
 
 ```js
-'use strict'
-import VueYouTubeEmbed from 'vue-youtube-embed'
 let videoId = VueYouTubeEmbed.getIdFromURL(url)
 let startTime = VueYouTubeEmbed.getTimeFromURL(url)
 ```
 
 or
 ```js
-'use strict'
 export default {
   methods: {
     method(url) {
@@ -91,7 +97,7 @@ The first argument is an instance of `YT.Player`.
 ```js
 'use strict'
 import Vue from 'vue'
-import VueYouTubeEmbed, { events } from 'vue-youtube-embed'
+import VueYouTubeEmbed from 'vue-youtube-embed'
 
 Vue.use(VueYouTubeEmbed)
 
