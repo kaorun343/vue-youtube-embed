@@ -147,191 +147,125 @@ describe('YouTubePlayer', () => {
     container.YT = {
       Player
     }
-
     container.Vue = {
       nextTick(callback) {
         callback()
       }
     }
+
   })
-  describe('#bind', () => {
-    it('should give an unique id to its element', () => {
-      const directive1 = Object.create(YouTubePlayer)
-      const directive2 = Object.create(YouTubePlayer)
-      directive1.el = document.createElement('div')
-      directive2.el = document.createElement('div')
-      directive1.bind()
-      directive2.bind()
-      assert(directive1.el.id !== directive2.el.id)
+
+  describe('#created', () => {
+    it('should call container.register', () => {
+      sinon.spy(container, 'register')
+      YouTubePlayer.created()
+
+      assert.ok(container.register.called)
+      container.register.restore()
     })
 
-    it('should not change the id of its element when id is defined', () => {
-      const directive = Object.create(YouTubePlayer)
-      const el = document.createElement('div')
-      const originalId = "originalId"
-      el.id = originalId
-      directive.el = el
-      directive.bind()
-      assert.equal(directive.el.id, originalId)
+    context('default values', () => {
+      it('should pass the default values', () => {
+        const videoId = 'videoId'
+        const component = {
+          created: YouTubePlayer.created,
+          videoId
+        }
+        component.created()
+
+        const {options} = component.player
+        assert.equal(options.videoId, 'videoId')
+        assert.equal(options.width, '640')
+        assert.equal(options.height, '390')
+      })
     })
 
-    it('should set the player "null"', () => {
-      const directive = Object.create(YouTubePlayer)
-      directive.el = document.createElement('div')
-      directive.bind()
-      assert(directive.player === null)
+    context('params are passed', () => {
+      it('should pass the params instead of default values', () => {
+        const videoId = 'videoId'
+        const playerWidth = '1280'
+        const playerHeight = '750'
+        const playerVars = {
+          start : 30,
+          autoplay: 1
+        }
+        const component = {
+          created: YouTubePlayer.created,
+          videoId,
+          playerWidth,
+          playerHeight,
+          playerVars
+        }
+        component.created()
+
+        const {options} = component.player
+        assert.equal(options.videoId, videoId)
+        assert.equal(options.width, playerWidth)
+        assert.equal(options.height, playerHeight)
+        assert.deepEqual(options.playerVars, playerVars)
+      })
     })
   })
 
   describe('#update', () => {
 
-    context('the first time', () => {
-      it('should create the instance of YT.Player', () => {
-        sinon.spy(container, 'register')
-        const directive = Object.assign(Object.create(YouTubePlayer), {
-          el: document.createElement('div'),
-          params: {},
-          modifiers: {}
-        })
-        directive.bind()
-        directive.update('videoId')
-        assert.ok(container.register.called)
-        assert(directive.player instanceof container.YT.Player)
-        container.register.restore()
-      })
-
-      context('default values', () => {
-        it('should pass the default values', () => {
-          const directive = Object.assign(Object.create(YouTubePlayer), {
-            el: document.createElement('div'),
-            params: {},
-            modifiers: {}
-          })
-          directive.bind()
-          directive.update('videoId')
-          const {options} = directive.player
-          assert.equal(options.videoId, 'videoId')
-          assert.equal(options.width, '640')
-          assert.equal(options.height, '390')
-        })
-      })
-
-      context('params are passed', () => {
-        it('should pass the params instead of default values', () => {
-          const directive = Object.assign(Object.create(YouTubePlayer), {
-            el: document.createElement('div'),
-            params: {
-              width: '1280',
-              height: '750',
-              playerVars: {
-                start: 30,
-                autoplay: 1
-              }
-            },
-            modifiers: {}
-          })
-          directive.bind()
-          directive.update('videoId')
-          const {options} = directive.player
-          assert.equal(options.videoId, 'videoId')
-          assert.equal(options.width, '1280')
-          assert.equal(options.height, '750')
-          assert.deepEqual(options.playerVars, {start: 30, autoplay: 1})
-        })
-      })
-
-      context('url is passed', () => {
-        it('should pass the correct videoId', () => {
-          const directive = Object.assign(Object.create(YouTubePlayer), {
-            el: document.createElement('div'),
-            params: {},
-            modifiers: {
-              url: true
-            }
-          })
-          directive.bind()
-          directive.update('https://youtu.be/3FY4MRdQOdE')
-          assert.equal(directive.player.options.videoId, '3FY4MRdQOdE')
-        })
-
-        it('should deal with the start time in the url', () => {
-          const directive = Object.assign(Object.create(YouTubePlayer), {
-            el: document.createElement('div'),
-            params: {},
-            modifiers: {
-              url: true
-            }
-          })
-          directive.bind()
-          directive.update('https://www.youtube.com/watch?v=3MteSlpxCpo&feature=youtu.be&t=4m20s')
-          assert.equal(directive.player.options.playerVars.start, 4 * 60 + 20)
-        })
+    context('default', () => {
+      it('should call YT.Player.prototype.cueVideoById()', () => {
+        const component = {
+          created: YouTubePlayer.created,
+          update: YouTubePlayer.methods.update
+        }
+        component.created()
+        sinon.spy(component.player, 'cueVideoById')
+        component.update('videoId')
+        assert.ok(component.player.cueVideoById.called)
       })
     })
 
-    context('value is changed', () => {
-
-      context('default', () => {
-        it('should call YT.Player.prototype.cueVideoById()', () => {
-          const directive = Object.assign(Object.create(YouTubePlayer), {
-            params: {},
-            modifiers: {},
-            player: new container.YT.Player(null, null)
-          })
-          sinon.spy(directive.player, 'cueVideoById')
-          directive.update('videoId')
-          assert.ok(directive.player.cueVideoById.called)
-        })
+    context('autoplay is 0', () => {
+      it('should call YT.Player.prototype.cueVideoById()', () => {
+        const component = {
+          created: YouTubePlayer.created,
+          update: YouTubePlayer.methods.update,
+          playerVars: {
+            autoplay: 0
+          }
+        }
+        component.created()
+        sinon.spy(component.player, 'cueVideoById')
+        component.update('videoId')
+        assert.ok(component.player.cueVideoById.called)
       })
+    })
 
-      context('autoplay is 0', () => {
-        it('should call YT.Player.prototype.cueVideoById()', () => {
-          const directive = Object.assign(Object.create(YouTubePlayer), {
-            params: {
-              playerVars: {
-                autoplay: 0
-              }
-            },
-            modifiers: {},
-            player: new container.YT.Player(null, null)
-          })
-          sinon.spy(directive.player, 'cueVideoById')
-          directive.update('videoId')
-          assert.ok(directive.player.cueVideoById.called)
-        })
-      })
-
-      context('autoplay is 1', () => {
-        it('should call YT.Player.prototype.loadVideoById()', () => {
-          const directive = Object.assign(Object.create(YouTubePlayer), {
-            params: {
-              playerVars: {
-                autoplay: 1
-              }
-            },
-            modifiers: {},
-            player: new container.YT.Player(null, null)
-          })
-          sinon.spy(directive.player, 'loadVideoById')
-          directive.update('videoId')
-          assert.ok(directive.player.loadVideoById.called)
-        })
+    context('autoplay is 1', () => {
+      it('should call YT.Player.prototype.loadVideoById()', () => {
+        const component = {
+          created: YouTubePlayer.created,
+          update: YouTubePlayer.methods.update,
+          playerVars: {
+            autoplay: 1
+          }
+        }
+        component.created()
+        sinon.spy(component.player, 'loadVideoById')
+        component.update('videoId')
+        assert.ok(component.player.loadVideoById.called)
       })
     })
   })
 
-  describe('#unbind', () => {
+  describe('#beforeDestroy', () => {
     it('should call YT.Player.prototype.destroy()', () => {
-      const directive = Object.assign(Object.create(YouTubePlayer), {
-        params: {},
-        modifiers: {}
-      })
+      const component = {
+        beforeDestroy: YouTubePlayer.beforeDestroy
+      }
       const player = new container.YT.Player(null, null)
-      directive.player = player
+      component.player = player
       sinon.spy(player, 'destroy')
-      directive.unbind()
+      component.beforeDestroy()
       assert.ok(player.destroy.called)
-      assert.ok(typeof directive.player === 'undefined')
+      assert.ok(typeof component.player === 'undefined')
     })
   })
 
@@ -345,8 +279,8 @@ describe('install', () => {
     Vue.use(install)
   })
 
-  it('should add "youtube" directive to Vue', () => {
-    assert.equal(Vue.directive('youtube'), YouTubePlayer)
+  it('should add "youtube" component to Vue', () => {
+    assert.ok(typeof Vue.component('youtube') !== 'undefined')
   })
 
   it('should add functions to Vue.prototype', () => {

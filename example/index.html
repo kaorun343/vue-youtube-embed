@@ -10,7 +10,7 @@
     <h1>Vue YouTube Embed</h1>
     <div>
       <h2>default value (#cueVideoById)</h2>
-      <div v-youtube="videoId"></div>
+      <youtube :video-id="videoId"></youtube>
     </div>
     <div>
       <h2>playerVars: {autoplay: 1, start: 30} (#loadVideoById)</h2>
@@ -24,7 +24,7 @@
           <input type="number" name="height" id="height" v-model="height">
         </fieldset>
       </div>
-      <div v-youtube="videoId" :width="width" :height="height" :player-vars="{autoplay: 1, start: 30}"></div>
+      <youtube :video-id="videoId" :player-width="width" :player-height="height" :player-vars="{autoplay: 1, start: 30}"></youtube>
     </div>
     <div>
       <label for="nextId">add a video id or an URL of YouTube</label>
@@ -32,10 +32,12 @@
       <div class="button-group">
         <button class="button" @click="next">next video</button>
         <button class="button" @click="add">add video</button>
+        <button class="button" @click="remove">remove video</button>
       </div>
     </div>
     <hr>
     <div><video-list v-for="video in videos" :video="video.videoId"></video-list></div>
+    <hr>
   </div>
   <script src="../node_modules/vue/dist/vue.min.js" charset="utf-8"></script>
   <script src="../lib/vue-youtube-embed.js" charset="utf-8"></script>

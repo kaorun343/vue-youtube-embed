@@ -83,83 +83,75 @@ export const container = {
   }
 }
 
-export const events = {
-  READY: 'youtube:player:ready',
-  ENDED: 'youtube:player:ended',
-  PLAYING: 'youtube:player:playing',
-  PAUSED: 'youtube:player:paused',
-  BUFFERING: 'youtube:player:buffering',
-  QUEUED: 'youtube:player:queued',
-  ERROR: 'youtube:player:error'
-}
-
-const _events = {
-  0: events.ENDED,
-  1: events.PLAYING,
-  2: events.PAUSED,
-  3: events.BUFFERING,
-  5: events.QUEUED
-}
-
-function setSize() {
-  let {width = '640', height = '390'} = this.params
-  this.player.setSize(width, height)
+const events = {
+  0: 'ended',
+  1: 'playing',
+  2: 'paused',
+  3: 'buffering',
+  5: 'queued'
 }
 
 let pid = 0
 
 export const YouTubePlayer = {
-  params: ['width', 'height', 'player-vars'],
-  paramWatchers: {
-    width: setSize,
-    height: setSize
+  props: ['playerHeight', 'playerWidth', 'playerVars', 'videoId'],
+  template: '<div><div :id="elementId"></div></div>',
+  watch: {
+    playerWidth: 'setSize',
+    playerHeight: 'setSize',
+    videoId: 'update'
   },
-  bind() {
-    this.el.id = this.el.id || `v-youtube-player-${pid}`
+  data() {
     pid += 1
-    this.player = null
-  },
-  update(videoId) {
-    let start = 0
-    if (this.modifiers.url) {
-      start = getTimeFromURL(videoId)
-      videoId = getIdFromURL(videoId)
+    return {
+      elementId: `youtube-player-${pid}`
     }
-
-    if (this.player === null) {
-      container.register((YouTube) => {
-        let {width = '640', height = '390', playerVars = {}} = this.params
-        playerVars.start = playerVars.start || start
-        const vm = this.vm
-        this.player = new YouTube.Player(this.el.id, {
-          width,
-          height,
-          videoId,
-          playerVars,
-          events: {
-            onReady(event) {
-              vm.$emit(events.READY, event.target)
-            },
-            onStateChange(event) {
-              if (event.data !== -1) {
-                vm.$emit(_events[event.data], event.target)
-              }
-            },
-            onError(event) {
-              vm.$emit(events.ERROR, event.target)
-            }
-          }
-        })
-      })
-    } else {
-      const {playerVars = {autoplay: 0}} = this.params
+  },
+  methods: {
+    setSize() {
+      this.player.setSize(this.playerWidth || '640', this.playerHeight || '390')
+    },
+    update(videoId) {
+      const {
+        playerVars = {autoplay: 0}
+      } = this
       const name = `${playerVars.autoplay ? 'load' : 'cue'}VideoById`
       this.player[name](videoId)
     }
   },
-  unbind() {
-    if(this.player != null) {
-        this.player.destroy()
+  created() {
+    container.register((YouTube) => {
+      const {
+        playerHeight : height = '390',
+        playerWidth : width = '640',
+        playerVars = {autoplay: 0, start: 0},
+        videoId
+      } = this
+
+      this.player = new YouTube.Player(this.elementId, {
+        height,
+        width,
+        playerVars,
+        videoId,
+        events: {
+          onReady: (event) => {
+            this.$emit('ready', event.target)
+          },
+          onStateChange: (event) => {
+            if (event.data !== -1) {
+              this.$emit(events[event.data], event.target)
+            }
+          },
+          onError: (event) => {
+            this.$emit('error', event.target)
+          }
+        }
+      })
+    })
+  },
+  beforeDestroy() {
+    if (this.player !== null) {
+      this.player.destroy()
     }
     delete this.player
   }
@@ -167,7 +159,7 @@ export const YouTubePlayer = {
 
 export function install(Vue) {
   container.Vue = Vue
-  Vue.directive('youtube', YouTubePlayer)
+  Vue.component('youtube', YouTubePlayer)
   Vue.prototype.$youtube = {getIdFromURL, getTimeFromURL}
 
   const tag = document.createElement('script')
@@ -177,7 +169,9 @@ export function install(Vue) {
 
   window.onYouTubeIframeAPIReady = function() {
     container.YT = YT
-    container.run()
+    Vue.nextTick(() => {
+      container.run()
+    })
   }
 }
 
