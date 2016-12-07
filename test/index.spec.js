@@ -158,7 +158,6 @@ describe('YouTubePlayer', () => {
   describe('#ready', () => {
     it('should call container.register', () => {
       sinon.spy(container, 'register')
-      console.log(YouTubePlayer)
       YouTubePlayer.mounted()
 
       assert.ok(container.register.called)
