@@ -11,18 +11,18 @@ window.app = new Vue({
     height: '390'
   },
   methods: {
-    pause() {
+    pause: function() {
       this.player.pauseVideo()
     },
-    next() {
+    next: function() {
       this.videoId = this.nextId
       this.nextId = ''
     },
-    add() {
+    add: function() {
       this.videos.push({videoId: this.nextId})
       this.nextId = ''
     },
-    remove() {
+    remove: function() {
       this.videos.pop()
     }
   },
