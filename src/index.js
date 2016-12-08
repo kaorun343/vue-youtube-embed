@@ -119,7 +119,7 @@ export const YouTubePlayer = {
       this.player[name](videoId)
     }
   },
-  ready() {
+  mounted() {
     container.register((YouTube) => {
       const {
         playerHeight : height = '390',

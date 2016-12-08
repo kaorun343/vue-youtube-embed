@@ -158,7 +158,7 @@ describe('YouTubePlayer', () => {
   describe('#ready', () => {
     it('should call container.register', () => {
       sinon.spy(container, 'register')
-      YouTubePlayer.ready()
+      YouTubePlayer.mounted()
 
       assert.ok(container.register.called)
       container.register.restore()
@@ -168,10 +168,10 @@ describe('YouTubePlayer', () => {
       it('should pass the default values', () => {
         const videoId = 'videoId'
         const component = {
-          ready: YouTubePlayer.ready,
+          mounted: YouTubePlayer.mounted,
           videoId
         }
-        component.ready()
+        component.mounted()
 
         const {options} = component.player
         assert.equal(options.videoId, 'videoId')
@@ -190,13 +190,13 @@ describe('YouTubePlayer', () => {
           autoplay: 1
         }
         const component = {
-          ready: YouTubePlayer.ready,
+          mounted: YouTubePlayer.mounted,
           videoId,
           playerWidth,
           playerHeight,
           playerVars
         }
-        component.ready()
+        component.mounted()
 
         const {options} = component.player
         assert.equal(options.videoId, videoId)
@@ -212,10 +212,10 @@ describe('YouTubePlayer', () => {
     context('default', () => {
       it('should call YT.Player.prototype.cueVideoById()', () => {
         const component = {
-          ready: YouTubePlayer.ready,
+          mounted: YouTubePlayer.mounted,
           update: YouTubePlayer.methods.update
         }
-        component.ready()
+        component.mounted()
         sinon.spy(component.player, 'cueVideoById')
         component.update('videoId')
         assert.ok(component.player.cueVideoById.called)
@@ -225,13 +225,13 @@ describe('YouTubePlayer', () => {
     context('autoplay is 0', () => {
       it('should call YT.Player.prototype.cueVideoById()', () => {
         const component = {
-          ready: YouTubePlayer.ready,
+          mounted: YouTubePlayer.mounted,
           update: YouTubePlayer.methods.update,
           playerVars: {
             autoplay: 0
           }
         }
-        component.ready()
+        component.mounted()
         sinon.spy(component.player, 'cueVideoById')
         component.update('videoId')
         assert.ok(component.player.cueVideoById.called)
@@ -241,13 +241,13 @@ describe('YouTubePlayer', () => {
     context('autoplay is 1', () => {
       it('should call YT.Player.prototype.loadVideoById()', () => {
         const component = {
-          ready: YouTubePlayer.ready,
+          mounted: YouTubePlayer.mounted,
           update: YouTubePlayer.methods.update,
           playerVars: {
             autoplay: 1
           }
         }
-        component.ready()
+        component.mounted()
         sinon.spy(component.player, 'loadVideoById')
         component.update('videoId')
         assert.ok(component.player.loadVideoById.called)
