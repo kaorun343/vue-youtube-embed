@@ -95,7 +95,11 @@ let pid = 0
 
 export const YouTubePlayer = {
   props: ['playerHeight', 'playerWidth', 'playerVars', 'videoId'],
-  template: '<div><div :id="elementId"></div></div>',
+  render (h) {
+    return h('div', [
+      h('div', { attrs: { id: this.elementId }})
+    ])
+  },
   watch: {
     playerWidth: 'setSize',
     playerHeight: 'setSize',
