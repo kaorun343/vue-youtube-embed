@@ -100,6 +100,7 @@ export const YouTubePlayer = {
       h('div', { attrs: { id: this.elementId }})
     ])
   },
+  template: '<div><div :id="elementId"></div></div>',
   watch: {
     playerWidth: 'setSize',
     playerHeight: 'setSize',
@@ -163,6 +164,7 @@ export const YouTubePlayer = {
 
 export function install(Vue) {
   container.Vue = Vue
+  YouTubePlayer.ready = YouTubePlayer.mounted
   Vue.component('youtube', YouTubePlayer)
   Vue.prototype.$youtube = {getIdFromURL, getTimeFromURL}
 
