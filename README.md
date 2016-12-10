@@ -74,7 +74,7 @@ These are the events that will be emitted by the component.
 * `playing`
 * `paused`
 * `buffering`
-* `queued`
+* `qued`
 * `error`
 
 The first argument is an instance of `YT.Player`.

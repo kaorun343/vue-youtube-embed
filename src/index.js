@@ -64,6 +64,7 @@ export function getTimeFromURL(url = "") {
 
 export const container = {
   scripts: [],
+  events: {},
 
   run() {
     this.scripts.forEach((callback) => {
@@ -81,14 +82,6 @@ export const container = {
       this.scripts.push(callback)
     }
   }
-}
-
-const events = {
-  0: 'ended',
-  1: 'playing',
-  2: 'paused',
-  3: 'buffering',
-  5: 'queued'
 }
 
 let pid = 0
@@ -144,7 +137,7 @@ export const YouTubePlayer = {
           },
           onStateChange: (event) => {
             if (event.data !== -1) {
-              this.$emit(events[event.data], event.target)
+              this.$emit(container.events[event.data], event.target)
             }
           },
           onError: (event) => {
@@ -175,6 +168,13 @@ export function install(Vue) {
 
   window.onYouTubeIframeAPIReady = function() {
     container.YT = YT
+
+    container.events[YT.PlayerState.ENDED] = 'ended'
+    container.events[YT.PlayerState.PLAYING] = 'playing'
+    container.events[YT.PlayerState.PAUSED] = 'paused'
+    container.events[YT.PlayerState.BUFFERING] = 'buffering'
+    container.events[YT.PlayerState.CUED] = 'cued'
+
     Vue.nextTick(() => {
       container.run()
     })
