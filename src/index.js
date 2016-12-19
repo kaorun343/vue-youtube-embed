@@ -114,7 +114,13 @@ export const YouTubePlayer = {
         playerVars = {autoplay: 0}
       } = this
       const name = `${playerVars.autoplay ? 'load' : 'cue'}VideoById`
-      this.player[name](videoId)
+      if (this.player.hasOwnProperty(name)) {
+        this.player[name](videoId)  
+      } else {
+        setTimeout(function () {
+          this.update(videoId)
+        }.bind(this), 100)
+      }
     }
   },
   mounted() {
