@@ -102,7 +102,8 @@ export const YouTubePlayer = {
   data() {
     pid += 1
     return {
-      elementId: `youtube-player-${pid}`
+      elementId: `youtube-player-${pid}`,
+      player: {}
     }
   },
   methods: {
