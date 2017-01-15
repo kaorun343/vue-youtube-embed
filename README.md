@@ -17,7 +17,8 @@ Vue.use(VueYouTubeEmbed)
 or
 
 ```bash
-npm install --save vue-youtube-embed
+// yarn or npm
+yarn install --save vue-youtube-embed
 ```
 
 ```js
@@ -26,9 +27,6 @@ import Vue from 'vue'
 import VueYouTubeEmbed from 'vue-youtube-embed'
 Vue.use(VueYouTubeEmbed)
 ```
-
-## Requirement
-* Vue.js
 
 ## Usage
 Please pass the ID of the video that you'd like to show.
@@ -59,7 +57,7 @@ or
 ```js
 export default {
   methods: {
-    method(url) {
+    method (url) {
       this.videoId = this.$youtube.getIdFromURL(url)
       this.startTime = this.$youtube.getTimeFromURL(url)
     }
@@ -79,7 +77,15 @@ These are the events that will be emitted by the component.
 
 The first argument is an instance of `YT.Player`.
 
-## Example
+## Example on vue-play
+
+```bash
+// yarn or npm
+yarn install
+yarn run play
+```
+
+## Example code
 
 ```html
 <div id="#app">
@@ -107,29 +113,28 @@ const app = new Vue({
     videoId: 'videoId',
   },
   methods: {
-    ready(player) {
+    ready (player) {
       this.player = player
     },
-    playing(player) {
+    playing (player) {
       // The player is playing a video.
     },
-    change() {
+    change () {
       // when you change the value, the player will also change.
       // If you would like to change `playerVars`, please change it before you change `videoId`.
       // If `playerVars.autoplay` is 1, `loadVideoById` will be called.
       // If `playerVars.autoplay` is 0, `cueVideoById` will be called.
       this.videoId = 'another video id'
     },
-    stop() {
+    stop () {
       this.player.stopVideo()
     },
-    pause() {
+    pause () {
       this.player.pauseVideo()
     }
   }
 })
 ```
-
 
 ## Contribution
 * contribution welcome!
