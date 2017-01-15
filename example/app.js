@@ -46,7 +46,7 @@ window.app = new Vue({
             @playing="playing"
             @paused="paused"
             @buffering="buffering"
-            @queued="queued">
+            @qued="qued">
           </youtube>
           <ol><li v-for="item in log">type: {{item.type}}</li></ol>
         </div>`
