@@ -7,7 +7,9 @@
     "lint": "eslint src/index.js",
     "test": "karma start",
     "build": "webpack",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "play": "vue-play start",
+    "play:build": "vue-play build"
   },
   "directories": {
     "test": "test"
@@ -42,8 +44,10 @@
     "mocha": "^2.4.5",
     "power-assert": "^1.2.0",
     "sinon": "^1.17.3",
-    "vue": "^2.1.4",
-    "webpack": "^1.12.14"
+    "vue": "^2.1.8",
+    "vue-play": "^2.2.0",
+    "vue-play-cli": "^1.0.4",
+    "webpack": "^1.14.0"
   },
   "dependencies": {},
   "repository": {
