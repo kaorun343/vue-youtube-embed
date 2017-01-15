@@ -59,7 +59,6 @@ module.exports = function(config) {
     plugins: [
       'karma-mocha',
       'karma-mocha-reporter',
-      'karma-sinon',
       'karma-webpack',
       'karma-chrome-launcher'
     ],
@@ -75,11 +74,7 @@ module.exports = function(config) {
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel',
-            query: {
-              presets: ['es2015'],
-              plugins: ['babel-plugin-espower']
-            }
+            loader: 'babel'
           },
           {
             test: /\.json$/,
