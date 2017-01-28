@@ -1,8 +1,11 @@
 'use strict'
-import assert from 'power-assert'
 import Vue from 'vue'
-import { getIdFromURL, getTimeFromURL, container, YouTubePlayer, install } from '../src/index'
+import assert from 'power-assert'
+import { YouTubePlayer, install } from '../src/index'
+import container from '../src/container'
+import { getIdFromURL, getTimeFromURL } from '../src/utils'
 
+// fork from https://github.com/brandly/angular-youtube-embed
 describe('getIdFromURL', () => {
   it('should handle regular query strings', () => {
     const url = 'https://www.youtube.com/watch?v=nViWpVc1x_4&feature=youtu.be'
@@ -41,6 +44,7 @@ describe('getIdFromURL', () => {
   })
 })
 
+// fork from https://github.com/brandly/angular-youtube-embed
 describe('getTimeFromURL', () => {
   it('should return 0 when time is not defined', () => {
     const url = 'https://www.youtube.com/watch?v=3MteSlpxCpo'

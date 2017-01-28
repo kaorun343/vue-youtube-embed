@@ -21,13 +21,19 @@ acorn-es7-plugin@^1.0.12:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/acorn-es7-plugin/-/acorn-es7-plugin-1.1.5.tgz#f31e1a618f439bfdde8851dd875a3a163ca8201f"
 
-acorn-jsx@^3.0.0:
+acorn-jsx@^3.0.0, acorn-jsx@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-3.0.1.tgz#afdf9488fb1ecefc8348f6fb22f464e32a58b36b"
   dependencies:
     acorn "^3.0.4"
 
-acorn@^3.0.0, acorn@^3.0.4:
+acorn-object-spread@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/acorn-object-spread/-/acorn-object-spread-1.0.0.tgz#48ead0f4a8eb16995a17a0db9ffc6acaada4ba68"
+  dependencies:
+    acorn "^3.1.0"
+
+acorn@^3.0.0, acorn@^3.0.4, acorn@^3.1.0, acorn@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
 
@@ -980,6 +986,18 @@ browserslist@^1.0.1, browserslist@^1.5.2, browserslist@~1.5.1:
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-1.5.2.tgz#1c82fde0ee8693e6d15c49b7bff209dc06298c56"
   dependencies:
     caniuse-db "^1.0.30000604"
+
+buble@^0.15.0, buble@^0.15.2:
+  version "0.15.2"
+  resolved "https://registry.yarnpkg.com/buble/-/buble-0.15.2.tgz#547fc47483f8e5e8176d82aa5ebccb183b02d613"
+  dependencies:
+    acorn "^3.3.0"
+    acorn-jsx "^3.0.1"
+    acorn-object-spread "^1.0.0"
+    chalk "^1.1.3"
+    magic-string "^0.14.0"
+    minimist "^1.2.0"
+    os-homedir "^1.0.1"
 
 buffer-shims@^1.0.0:
   version "1.0.0"
@@ -1936,6 +1954,10 @@ estraverse@~4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.1.1.tgz#f6caca728933a850ef90661d0e17982ba47111a2"
 
+estree-walker@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-0.2.1.tgz#bdafe8095383d8414d5dc2ecf4c9173b6db9412e"
+
 esutils@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
@@ -2163,6 +2185,12 @@ form-data@~2.1.1:
     asynckit "^0.4.0"
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
+
+formatio@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/formatio/-/formatio-1.1.1.tgz#5ed3ccd636551097383465d996199100e86161e9"
+  dependencies:
+    samsam "~1.1"
 
 forwarded@~0.1.0:
   version "0.1.0"
@@ -2904,6 +2932,10 @@ karma-mocha@^1.3.0:
   dependencies:
     minimist "1.2.0"
 
+karma-sinon@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/karma-sinon/-/karma-sinon-1.0.5.tgz#4e3443f2830fdecff624d3747163f1217daa2a9a"
+
 karma-webpack@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/karma-webpack/-/karma-webpack-2.0.1.tgz#271ac955685b9bd99365ef010ffc5655eac28ef6"
@@ -3239,6 +3271,10 @@ log4js@^0.6.31:
     readable-stream "~1.0.2"
     semver "~4.3.3"
 
+lolex@1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/lolex/-/lolex-1.3.2.tgz#7c3da62ffcb30f0f5a80a2566ca24e45d8a01f31"
+
 longest@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/longest/-/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
@@ -3277,6 +3313,12 @@ lru-cache@^4.0.0, lru-cache@^4.0.1:
 macaddress@^0.2.8:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/macaddress/-/macaddress-0.2.8.tgz#5904dc537c39ec6dbefeae902327135fa8511f12"
+
+magic-string@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.14.0.tgz#57224aef1701caeed273b17a39a956e72b172462"
+  dependencies:
+    vlq "^0.2.1"
 
 map-obj@^1.0.0:
   version "1.0.1"
@@ -3637,7 +3679,7 @@ os-browserify@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/os-browserify/-/os-browserify-0.2.1.tgz#63fc4ccee5d2d7763d26bbf8601078e6c2e0044f"
 
-os-homedir@^1.0.0:
+os-homedir@^1.0.0, os-homedir@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-homedir/-/os-homedir-1.0.2.tgz#ffbc4988336e0e833de0c168c7ef152121aa7fb3"
 
@@ -4523,6 +4565,26 @@ ripemd160@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-0.2.0.tgz#2bf198bde167cacfa51c0a928e84b68bbe171fce"
 
+rollup-plugin-buble@^0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-buble/-/rollup-plugin-buble-0.15.0.tgz#83c3e89c7fd2266c7918f41ba3980313519c7fd0"
+  dependencies:
+    buble "^0.15.0"
+    rollup-pluginutils "^1.5.0"
+
+rollup-pluginutils@^1.5.0:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-1.5.2.tgz#1e156e778f94b7255bfa1b3d0178be8f5c552408"
+  dependencies:
+    estree-walker "^0.2.1"
+    minimatch "^3.0.2"
+
+rollup@^0.41.4:
+  version "0.41.4"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.41.4.tgz#a970580176329f9ead86854d7fd4c46de752aef8"
+  dependencies:
+    source-map-support "^0.4.0"
+
 run-applescript@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/run-applescript/-/run-applescript-3.0.0.tgz#08252093def5b42d1b58654b16c2df9888e27bd7"
@@ -4542,6 +4604,10 @@ rx-lite@^3.1.2:
 safe-buffer@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.0.1.tgz#d263ca54696cd8a306b5ca6551e92de57918fbe7"
+
+samsam@1.1.2, samsam@~1.1:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/samsam/-/samsam-1.1.2.tgz#bec11fdc83a9fda063401210e40176c3024d1567"
 
 sax@~1.2.1:
   version "1.2.1"
@@ -4624,6 +4690,15 @@ signal-exit@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
+sinon@^1.17.7:
+  version "1.17.7"
+  resolved "https://registry.yarnpkg.com/sinon/-/sinon-1.17.7.tgz#4542a4f49ba0c45c05eb2e9dd9d203e2b8efe0bf"
+  dependencies:
+    formatio "1.1.1"
+    lolex "1.3.2"
+    samsam "1.1.2"
+    util ">=0.10.3 <1"
+
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
@@ -4696,7 +4771,7 @@ source-list-map@^0.1.4, source-list-map@~0.1.0, source-list-map@~0.1.7:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-0.1.8.tgz#c550b2ab5427f6b3f21f5afead88c4f5587b2106"
 
-source-map-support@^0.4.2:
+source-map-support@^0.4.0, source-map-support@^0.4.2:
   version "0.4.8"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.8.tgz#4871918d8a3af07289182e974e32844327b2e98b"
   dependencies:
@@ -5122,7 +5197,7 @@ util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
 
-util@0.10.3, util@^0.10.3:
+util@0.10.3, "util@>=0.10.3 <1", util@^0.10.3:
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/util/-/util-0.10.3.tgz#7afb1afe50805246489e3db7fe0ed379336ac0f9"
   dependencies:
@@ -5174,6 +5249,10 @@ verror@1.3.6:
   resolved "https://registry.yarnpkg.com/verror/-/verror-1.3.6.tgz#cff5df12946d297d2baaefaa2689e25be01c005c"
   dependencies:
     extsprintf "1.0.2"
+
+vlq@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/vlq/-/vlq-0.2.1.tgz#14439d711891e682535467f8587c5630e4222a6c"
 
 vm-browserify@0.0.4:
   version "0.0.4"
