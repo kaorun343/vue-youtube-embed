@@ -11,7 +11,7 @@ export default {
   plugins: [
     buble()
   ],
-  banner: `/**
+  banner: `/*!
   * Vue YouTube Embed version ${version}
   * under MIT License copyright ${new Date().getFullYear()} kaorun343
   */`
