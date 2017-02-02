@@ -7,7 +7,7 @@
 
 <script>
 import Vue from 'vue'
-import YouTube from '../'
+import YouTube from '../src/index'
 Vue.use(YouTube)
 
 export default {

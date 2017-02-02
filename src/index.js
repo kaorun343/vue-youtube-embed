@@ -3,6 +3,8 @@
 import { getIdFromURL, getTimeFromURL } from './utils'
 import container from './container'
 
+export { getIdFromURL, getTimeFromURL }
+
 let pid = 0
 
 export const YouTubePlayer = {
