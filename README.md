@@ -77,6 +77,12 @@ These are the events that will be emitted by the component.
 
 The first argument is an instance of `YT.Player`.
 
+### The way of start playing video automatically
+
+```html
+<youtube :player-vars="{autoplay: 1}"></youtube>
+```
+
 ## Example on vue-play
 
 ```bash
