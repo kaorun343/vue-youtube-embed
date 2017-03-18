@@ -38,10 +38,11 @@ Please pass the ID of the video that you'd like to show.
 ### Props
 
 These are available props.
-* `player-width`: `String`, default value is `640`
-* `player-height`: `String`, default value is `390`
+* `player-width`: `String` or `Number`, default value is `640`
+* `player-height`: `String` or `Number`, default value is `390`
 * `player-vars`: `Object`, default value is `{start: 0, autoplay: 0}`
 * `video-id`: `String`, `required`
+* `mute`: `Boolean` default value is `false`
 
 ### Methods
 These functions are the same as the original one.
@@ -49,8 +50,9 @@ These functions are the same as the original one.
 * `getTimeFromURL`
 
 ```js
-let videoId = VueYouTubeEmbed.getIdFromURL(url)
-let startTime = VueYouTubeEmbed.getTimeFromURL(url)
+import { getIdFromURL, getTimeFromURL } from 'vue-youtube-embed'
+let videoId = getIdFromURL(url)
+let startTime = getTimeFromURL(url)
 ```
 
 or
@@ -80,7 +82,7 @@ The first argument is an instance of `YT.Player`.
 ### The way of start playing video automatically
 
 ```html
-<youtube :player-vars="{autoplay: 1}"></youtube>
+<youtube :player-vars="{ autoplay: 1 }"></youtube>
 ```
 
 ## Example on vue-play
