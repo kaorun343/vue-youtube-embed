@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Wed Dec 16 2015 21:28:49 GMT+0900 (JST)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -13,7 +13,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/index.spec.js'
+      'test/*.spec.js'
     ],
 
     // list of files to exclude
@@ -23,7 +23,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/index.spec.js': 'webpack'
+      'test/*.spec.js': 'webpack'
     },
 
     // test results reporter to use
@@ -75,11 +75,7 @@ module.exports = function(config) {
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel'
-          },
-          {
-            test: /\.json$/,
-            loader: 'json'
+            loader: 'babel-loader'
           }
         ]
       },

@@ -3,7 +3,27 @@ import container from './container'
 let pid = 0
 
 export default {
-  props: ['playerHeight', 'playerWidth', 'playerVars', 'videoId', 'mute'],
+  props: {
+    playerHeight: {
+      type: String,
+      default: '390'
+    },
+    playerWidth: {
+      type: String,
+      default: '640'
+    },
+    playerVars: {
+      type: Object,
+      default: () => ({ autoplay: 0, time: 0 })
+    },
+    videoId: {
+      type: String
+    },
+    mute: {
+      type: Boolean,
+      default: false
+    }
+  },
   render (h) {
     return h('div', [
       h('div', { attrs: { id: this.elementId }})
@@ -25,20 +45,17 @@ export default {
   },
   methods: {
     setSize () {
-      this.player.setSize(this.playerWidth || '640', this.playerHeight || '390')
+      this.player.setSize(this.playerWidth, this.playerHeight)
     },
-    setMute () {
-      if (this.mute && this.player.isMuted()) {
+    setMute (value) {
+      if (value) {
         this.player.mute()
       } else {
         this.player.unMute()
       }
     },
     update (videoId) {
-      const {
-        playerVars = { autoplay: 0 }
-      } = this
-      const name = `${playerVars.autoplay ? 'load' : 'cue'}VideoById`
+      const name = `${this.playerVars.autoplay ? 'load' : 'cue'}VideoById`
       if (this.player.hasOwnProperty(name)) {
         this.player[name](videoId)
       } else {
@@ -50,16 +67,11 @@ export default {
   },
   mounted () {
     container.register((YouTube) => {
-      const {
-        playerHeight: height = '390',
-        playerWidth: width = '640',
-        playerVars = { autoplay: 0, start: 0 },
-        videoId
-      } = this
+      const { playerHeight, playerWidth, playerVars, videoId } = this
 
       this.player = new YouTube.Player(this.elementId, {
-        height,
-        width,
+        height: playerHeight,
+        width: playerWidth,
         playerVars,
         videoId,
         events: {

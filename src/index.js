@@ -1,10 +1,8 @@
-'use strict'
-
 import { getIdFromURL, getTimeFromURL } from './utils'
 import container from './container'
 import YouTubePlayer from './player'
 
-export { getIdFromURL, getTimeFromURL }
+export { YouTubePlayer, getIdFromURL, getTimeFromURL }
 
 export function install (Vue) {
   container.Vue = Vue
