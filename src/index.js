@@ -4,7 +4,7 @@ import YouTubePlayer from './player'
 
 export { YouTubePlayer, getIdFromURL, getTimeFromURL }
 
-export function install (Vue) {
+export default function install (Vue) {
   container.Vue = Vue
   YouTubePlayer.ready = YouTubePlayer.mounted
   Vue.component('youtube', YouTubePlayer)
@@ -29,8 +29,4 @@ export function install (Vue) {
       container.run()
     })
   }
-}
-
-export default {
-  getIdFromURL, getTimeFromURL, YouTubePlayer, install
 }
