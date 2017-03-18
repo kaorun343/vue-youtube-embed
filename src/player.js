@@ -5,11 +5,11 @@ let pid = 0
 export default {
   props: {
     playerHeight: {
-      type: String,
+      type: [String, Number],
       default: '390'
     },
     playerWidth: {
-      type: String,
+      type: [String, Number],
       default: '640'
     },
     playerVars: {
@@ -76,6 +76,7 @@ export default {
         videoId,
         events: {
           onReady: (event) => {
+            this.setMute(this.mute)
             this.$emit('ready', event.target)
           },
           onStateChange: (event) => {
@@ -88,8 +89,6 @@ export default {
           }
         }
       })
-
-      this.setMute()
     })
   },
   beforeDestroy () {
