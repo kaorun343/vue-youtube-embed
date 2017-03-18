@@ -54,6 +54,7 @@
     "vue": "^2.2.4",
     "vue-play": "^3.1.1",
     "vue-play-cli": "^1.1.1",
+    "vue-template-compiler": "^2.2.4",
     "webpack": "^2.2.1"
   },
   "repository": {
