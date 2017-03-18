@@ -4,7 +4,7 @@
   "description": "Vue.js and YouTube",
   "main": "lib/vue-youtube-embed.js",
   "scripts": {
-    "lint": "eslint src/index.js",
+    "lint": "eslint src/*.js test/*.js example/*.js play/*.vue play/*.js --fix",
     "test": "karma start",
     "build": "rollup -c rollup.config.js",
     "prepublish": "npm run build",

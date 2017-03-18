@@ -1,0 +1,19 @@
+{
+  "extends": ["vue"],
+  "plugins": ["html", "vue"],
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
+  "env": {
+    "mocha": true
+  },
+  "globals": {
+    "sinon": true,
+    "YT": true
+  },
+  "rules": {
+    "no-extend-native": [
+      "error", { "exceptions": ["String"] }
+    ]
+  }
+}

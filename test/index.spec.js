@@ -90,10 +90,10 @@ describe('container', () => {
   context('when YouTube is ready', () => {
     before(() => {
       container.YT = {
-        Player() {}
+        Player () {}
       }
       container.Vue = {
-        nextTick(callback) {
+        nextTick (callback) {
           callback()
         }
       }
@@ -119,7 +119,6 @@ describe('container', () => {
     })
 
     describe('#register', () => {
-
       it('should call callback', () => {
         sinon.spy(container.Vue, 'nextTick')
         const callbackSpy = sinon.spy()
@@ -140,23 +139,22 @@ describe('container', () => {
 describe('YouTubePlayer', () => {
   before(() => {
     class Player {
-      constructor(el, options) {
+      constructor (el, options) {
         this.el = el
         this.options = options
       }
-      cueVideoById() {}
-      loadVideoById() {}
-      destroy() {}
+      cueVideoById () {}
+      loadVideoById () {}
+      destroy () {}
     }
     container.YT = {
       Player
     }
     container.Vue = {
-      nextTick(callback) {
+      nextTick (callback) {
         callback()
       }
     }
-
   })
 
   describe('#ready', () => {
@@ -177,7 +175,7 @@ describe('YouTubePlayer', () => {
         }
         component.mounted()
 
-        const {options} = component.player
+        const { options } = component.player
         assert.equal(options.videoId, 'videoId')
         assert.equal(options.width, '640')
         assert.equal(options.height, '390')
@@ -190,7 +188,7 @@ describe('YouTubePlayer', () => {
         const playerWidth = '1280'
         const playerHeight = '750'
         const playerVars = {
-          start : 30,
+          start: 30,
           autoplay: 1
         }
         const component = {
@@ -202,7 +200,7 @@ describe('YouTubePlayer', () => {
         }
         component.mounted()
 
-        const {options} = component.player
+        const { options } = component.player
         assert.equal(options.videoId, videoId)
         assert.equal(options.width, playerWidth)
         assert.equal(options.height, playerHeight)
@@ -212,7 +210,6 @@ describe('YouTubePlayer', () => {
   })
 
   describe('#update', () => {
-
     context('default', () => {
       it('should call YT.Player.prototype.cueVideoById()', () => {
         const component = {
@@ -288,7 +285,7 @@ describe('install', () => {
   })
 
   it('should add functions to Vue.prototype', () => {
-    const {$youtube} = Vue.prototype
+    const { $youtube } = Vue.prototype
     assert(typeof $youtube === 'object')
     assert.equal($youtube.getIdFromURL, getIdFromURL)
     assert.equal($youtube.getTimeFromURL, getTimeFromURL)

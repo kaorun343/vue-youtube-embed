@@ -20,7 +20,7 @@ import container from './container.vue'
 export default {
   data () {
     return {
-      title: "Height and Width",
+      title: 'Height and Width',
       height: 390,
       width: 640
     }

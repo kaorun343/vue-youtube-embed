@@ -2,7 +2,7 @@
 'use strict'
 
 if (!String.prototype.includes) {
-  String.prototype.includes = function() {
+  String.prototype.includes = function () {
     'use strict'
     return String.prototype.indexOf.apply(this, arguments) !== -1
   }
@@ -16,20 +16,20 @@ const timeRegexp = /t=(\d+)[ms]?(\d+)?s?/
  * @param  {string} url url
  * @return {string}     id
  */
-export function getIdFromURL(url) {
-  let id = url.replace(youtubeRegexp, "$1")
+export function getIdFromURL (url) {
+  let id = url.replace(youtubeRegexp, '$1')
 
-  if ( id.includes(";") ) {
-    const pieces = id.split(";")
+  if (id.includes(';')) {
+    const pieces = id.split(';')
 
-    if ( pieces[1].includes("%") ) {
+    if (pieces[1].includes('%')) {
       const uriComponent = decodeURIComponent(pieces[1])
-      id = `http://youtube.com${uriComponent}`.replace(youtubeRegexp, "$1")
+      id = `http://youtube.com${uriComponent}`.replace(youtubeRegexp, '$1')
     } else {
       id = pieces[0]
     }
-  } else if ( id.includes("#") ) {
-    id = id.split("#")[0]
+  } else if (id.includes('#')) {
+    id = id.split('#')[0]
   }
 
   return id
@@ -40,19 +40,20 @@ export function getIdFromURL(url) {
  * @param  {string} url url
  * @return {number}     time
  */
-export function getTimeFromURL(url = "") {
+export function getTimeFromURL (url = '') {
   const times = url.match(timeRegexp)
 
-  if ( !times ) {
+  if (!times) {
     return 0
   }
 
-  let [full, minutes, seconds] = times
+  const [full] = times
+  let [, minutes, seconds] = times
 
-  if ( typeof seconds !== "undefined" ) {
+  if (typeof seconds !== 'undefined') {
     seconds = parseInt(seconds, 10)
     minutes = parseInt(minutes, 10)
-  } else if ( full.includes("m") ) {
+  } else if (full.includes('m')) {
     minutes = parseInt(minutes, 10)
     seconds = 0
   } else {

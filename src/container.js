@@ -4,14 +4,14 @@ export default {
   scripts: [],
   events: {},
 
-  run() {
+  run () {
     this.scripts.forEach((callback) => {
       callback(this.YT)
     })
     this.scripts = []
   },
 
-  register(callback) {
+  register (callback) {
     if (this.YT) {
       this.Vue.nextTick(() => {
         callback(this.YT)

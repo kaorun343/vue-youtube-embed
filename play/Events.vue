@@ -17,7 +17,7 @@ import container from './container.vue'
 export default {
   data () {
     return {
-      title: "Events"
+      title: 'Events'
     }
   },
   methods: {

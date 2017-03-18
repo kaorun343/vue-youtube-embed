@@ -20,7 +20,7 @@ export const YouTubePlayer = {
     playerHeight: 'setSize',
     videoId: 'update'
   },
-  data() {
+  data () {
     pid += 1
     return {
       elementId: `youtube-player-${pid}`,
@@ -28,12 +28,19 @@ export const YouTubePlayer = {
     }
   },
   methods: {
-    setSize() {
+    setSize () {
       this.player.setSize(this.playerWidth || '640', this.playerHeight || '390')
     },
-    update(videoId) {
+    setMute () {
+      if (this.mute && this.player.isMuted()) {
+        this.player.mute()
+      } else {
+        this.player.unMute()
+      }
+    },
+    update (videoId) {
       const {
-        playerVars = {autoplay: 0}
+        playerVars = { autoplay: 0 }
       } = this
       const name = `${playerVars.autoplay ? 'load' : 'cue'}VideoById`
       if (this.player.hasOwnProperty(name)) {
@@ -45,12 +52,12 @@ export const YouTubePlayer = {
       }
     }
   },
-  mounted() {
+  mounted () {
     container.register((YouTube) => {
       const {
-        playerHeight : height = '390',
-        playerWidth : width = '640',
-        playerVars = {autoplay: 0, start: 0},
+        playerHeight: height = '390',
+        playerWidth: width = '640',
+        playerVars = { autoplay: 0, start: 0 },
         videoId
       } = this
 
@@ -73,9 +80,11 @@ export const YouTubePlayer = {
           }
         }
       })
+
+      this.setMute()
     })
   },
-  beforeDestroy() {
+  beforeDestroy () {
     if (this.player !== null) {
       this.player.destroy()
     }
@@ -83,18 +92,18 @@ export const YouTubePlayer = {
   }
 }
 
-export function install(Vue) {
+export function install (Vue) {
   container.Vue = Vue
   YouTubePlayer.ready = YouTubePlayer.mounted
   Vue.component('youtube', YouTubePlayer)
-  Vue.prototype.$youtube = {getIdFromURL, getTimeFromURL}
+  Vue.prototype.$youtube = { getIdFromURL, getTimeFromURL }
 
   const tag = document.createElement('script')
-  tag.src = "https://www.youtube.com/player_api"
+  tag.src = 'https://www.youtube.com/player_api'
   const firstScriptTag = document.getElementsByTagName('script')[0]
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
 
-  window.onYouTubeIframeAPIReady = function() {
+  window.onYouTubeIframeAPIReady = function () {
     container.YT = YT
     const { PlayerState } = YT
 
@@ -111,5 +120,5 @@ export function install(Vue) {
 }
 
 export default {
-   getIdFromURL, getTimeFromURL, YouTubePlayer, install
+  getIdFromURL, getTimeFromURL, YouTubePlayer, install
 }
