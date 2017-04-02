@@ -17,12 +17,14 @@ Vue.use(VueYouTubeEmbed)
 or
 
 ```bash
-// yarn or npm
-yarn install --save vue-youtube-embed
+// NPM
+npm i -S vue-youtube-embed
+
+// or with Yarn
+yarn add vue-youtube-embed
 ```
 
 ```js
-'use strict'
 import Vue from 'vue'
 import VueYouTubeEmbed from 'vue-youtube-embed'
 Vue.use(VueYouTubeEmbed)
