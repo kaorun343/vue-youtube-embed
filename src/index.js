@@ -4,31 +4,36 @@ import YouTubePlayer from './player'
 
 export { YouTubePlayer, getIdFromURL, getTimeFromURL }
 
-export default function install (Vue, options = { global: true }) {
-  container.Vue = Vue
-  YouTubePlayer.ready = YouTubePlayer.mounted
-  if (options.global) {
-    Vue.component('youtube', YouTubePlayer)
-  }
-  Vue.prototype.$youtube = { getIdFromURL, getTimeFromURL }
+export default {
+  install (Vue, options = { global: true }) {
+    container.Vue = Vue
+    YouTubePlayer.ready = YouTubePlayer.mounted
+    if (options.global) {
+      Vue.component('youtube', YouTubePlayer)
+    }
+    Vue.prototype.$youtube = { getIdFromURL, getTimeFromURL }
 
-  const tag = document.createElement('script')
-  tag.src = 'https://www.youtube.com/player_api'
-  const firstScriptTag = document.getElementsByTagName('script')[0]
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      const tag = document.createElement('script')
+      tag.src = 'https://www.youtube.com/player_api'
+      const firstScriptTag = document.getElementsByTagName('script')[0]
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
 
-  window.onYouTubeIframeAPIReady = function () {
-    container.YT = YT
-    const { PlayerState } = YT
+      window.onYouTubeIframeAPIReady = function () {
+        container.YT = YT
+        const { PlayerState } = YT
 
-    container.events[PlayerState.ENDED] = 'ended'
-    container.events[PlayerState.PLAYING] = 'playing'
-    container.events[PlayerState.PAUSED] = 'paused'
-    container.events[PlayerState.BUFFERING] = 'buffering'
-    container.events[PlayerState.CUED] = 'cued'
+        container.events[PlayerState.ENDED] = 'ended'
+        container.events[PlayerState.PLAYING] = 'playing'
+        container.events[PlayerState.PAUSED] = 'paused'
+        container.events[PlayerState.BUFFERING] = 'buffering'
+        container.events[PlayerState.CUED] = 'cued'
 
-    Vue.nextTick(() => {
-      container.run()
-    })
+        container.Vue.nextTick(() => {
+          container.run()
+        })
+      }
+    }
   }
 }
+
