@@ -2,8 +2,10 @@ import { getIdFromURL, getTimeFromURL } from './utils'
 import container from './container'
 import YouTubePlayer from './player'
 
-export default { YouTubePlayer, getIdFromURL, getTimeFromURL,
-  install: function (Vue, options = { global: true }) {
+export { YouTubePlayer, getIdFromURL, getTimeFromURL }
+
+export default {
+  install (Vue, options = { global: true }) {
     container.Vue = Vue
     YouTubePlayer.ready = YouTubePlayer.mounted
     if (options.global) {
@@ -34,3 +36,4 @@ export default { YouTubePlayer, getIdFromURL, getTimeFromURL,
     }
   }
 }
+
