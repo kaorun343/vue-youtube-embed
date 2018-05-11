@@ -44,7 +44,7 @@ Please pass the ID of the video that you'd like to show.
 These are available props.
 * `player-width`: `String` or `Number`, default value is `640`
 * `player-height`: `String` or `Number`, default value is `390`
-* `player-vars`: `Object`, default value is `{start: 0, autoplay: 0}`
+* `player-vars`: `Object`, default value is `{start: 0, autoplay: 0}` Can also specify `rel` and `showInfo`
 * `video-id`: `String`, `required`
 * `mute`: `Boolean` default value is `false`
 
@@ -147,6 +147,9 @@ const app = new Vue({
   }
 })
 ```
+
+## Usage with Nuxt SSR
+To get this component working with Nuxt, wrap it in Nuxt's [`no-ssr` component](https://nuxtjs.org/api/components-no-ssr/).
 
 ## Contribution
 * contribution welcome!
