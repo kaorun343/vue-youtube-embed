@@ -1,6 +1,6 @@
 'use strict'
 /*global Vue VueYouTubeEmbed:true*/
-Vue.use(VueYouTubeEmbed)
+Vue.use(VueYouTubeEmbed.default)
 
 window.app = new Vue({
   el: '#app',
@@ -52,7 +52,7 @@ window.app = new Vue({
           <ol><li v-for="item in log">type: {{item.type}}</li></ol>
         </div>`,
       methods: (function () {
-        var events = ['ready', 'ended', 'playing', 'paused', 'buffering', 'queued']
+        var events = ['ready', 'ended', 'playing', 'paused', 'buffering', 'qued']
         var methods = {}
 
         events.forEach(function (event) {
