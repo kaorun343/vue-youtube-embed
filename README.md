@@ -35,6 +35,7 @@ Vue.use(VueYouTubeEmbed, { global: false })
 ```
 
 ## Usage
+
 Please pass the ID of the video that you'd like to show.
 
 ```html
