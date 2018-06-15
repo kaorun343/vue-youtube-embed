@@ -1,8 +1,10 @@
 # Vue YouTube Embed
+
 This is a component for Vue.js to utilize YouTube iframe API easily.
 This is based on [Angular YouTube Embed](http://brandly.github.io/angular-youtube-embed/)
 
 ## License
+
 MIT License
 
 ## install
@@ -42,6 +44,7 @@ Please pass the ID of the video that you'd like to show.
 ### Props
 
 These are available props.
+
 * `player-width`: `String` or `Number`, default value is `640`
 * `player-height`: `String` or `Number`, default value is `390`
 * `player-vars`: `Object`, default value is `{start: 0, autoplay: 0}` Can also specify `rel` and `showInfo`
@@ -49,7 +52,9 @@ These are available props.
 * `mute`: `Boolean` default value is `false`
 
 ### Methods
+
 These functions are the same as the original one.
+
 * `getIdFromURL`
 * `getTimeFromURL`
 
@@ -60,6 +65,7 @@ let startTime = getTimeFromURL(url)
 ```
 
 or
+
 ```js
 export default {
   methods: {
@@ -72,7 +78,9 @@ export default {
 ```
 
 ### Events
+
 These are the events that will be emitted by the component.
+
 * `ready`
 * `ended`
 * `playing`
@@ -81,7 +89,7 @@ These are the events that will be emitted by the component.
 * `qued`
 * `error`
 
-The first argument is an instance of `YT.Player`.
+The first argument contains the instance of `YT.Player` at the parameter `target`.
 
 ### The way of start playing video automatically
 
@@ -149,7 +157,9 @@ const app = new Vue({
 ```
 
 ## Usage with Nuxt SSR
+
 To get this component working with Nuxt, wrap it in Nuxt's [`no-ssr` component](https://nuxtjs.org/api/components-no-ssr/).
 
 ## Contribution
-* contribution welcome!
+
+contribution welcome!

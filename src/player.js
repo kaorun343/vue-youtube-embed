@@ -78,15 +78,15 @@ export default {
         events: {
           onReady: (event) => {
             this.setMute(this.mute)
-            this.$emit('ready', event.target)
+            this.$emit('ready', event)
           },
           onStateChange: (event) => {
             if (event.data !== -1) {
-              this.$emit(container.events[event.data], event.target)
+              this.$emit(container.events[event.data], event)
             }
           },
           onError: (event) => {
-            this.$emit('error', event.target)
+            this.$emit('error', event)
           }
         }
       })
