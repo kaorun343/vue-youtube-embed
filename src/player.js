@@ -74,7 +74,6 @@ export default {
         width: playerWidth,
         playerVars,
         videoId,
-        host: 'https://www.youtube.com',
         events: {
           onReady: (event) => {
             this.setMute(this.mute)
