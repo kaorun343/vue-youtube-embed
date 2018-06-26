@@ -19,3 +19,4 @@ describe('install', () => {
     assert.equal($youtube.getTimeFromURL, getTimeFromURL)
   })
 })
+

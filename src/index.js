@@ -5,11 +5,15 @@ import YouTubePlayer from './player'
 export { YouTubePlayer, getIdFromURL, getTimeFromURL }
 
 export default {
-  install (Vue, options = { global: true }) {
+  install(Vue, options = { global: true }) {
     container.Vue = Vue
     YouTubePlayer.ready = YouTubePlayer.mounted
+
     if (options.global) {
-      Vue.component('youtube', YouTubePlayer)
+      // if there is a global component with "youtube" identifier already taken
+      // then we should let user to pass a new identifier.
+      const componentId = options.componentId || 'youtube';
+      Vue.component(componentId, YouTubePlayer)
     }
     Vue.prototype.$youtube = { getIdFromURL, getTimeFromURL }
 
