@@ -32,6 +32,8 @@ import VueYouTubeEmbed from 'vue-youtube-embed'
 Vue.use(VueYouTubeEmbed)
 // if you don't want install the component globally
 Vue.use(VueYouTubeEmbed, { global: false })
+// if you want to install the component globally with a different name
+Vue.use(VueYouTubeEmbed, { global: true, componentId:"youtube-media" })
 ```
 
 ## Usage
@@ -40,8 +42,10 @@ Please pass the ID of the video that you'd like to show.
 
 ```html
 <youtube :video-id="videoId"></youtube>
-```
 
+<!-- or with a custom component identifier -->
+<youtube-media :video-id="videoId"></youtube-media>
+```
 ### Props
 
 These are available props.
