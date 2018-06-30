@@ -10,7 +10,7 @@ MIT License
 ## install
 
 ```html
-<script src="vue-youtube-embed.js"></script>
+<script src="vue-youtube-embed.umd.js"></script>
 <script>
 Vue.use(VueYouTubeEmbed)
 </script>
@@ -33,7 +33,7 @@ Vue.use(VueYouTubeEmbed)
 // if you don't want install the component globally
 Vue.use(VueYouTubeEmbed, { global: false })
 // if you want to install the component globally with a different name
-Vue.use(VueYouTubeEmbed, { global: true, componentId:"youtube-media" })
+Vue.use(VueYouTubeEmbed, { global: true, componentId: "youtube-media" })
 ```
 
 ## Usage
