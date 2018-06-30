@@ -46,6 +46,7 @@ Please pass the ID of the video that you'd like to show.
 <!-- or with a custom component identifier -->
 <youtube-media :video-id="videoId"></youtube-media>
 ```
+
 ### Props
 
 These are available props.
