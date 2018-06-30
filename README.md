@@ -139,10 +139,10 @@ const app = new Vue({
     videoId: 'videoId',
   },
   methods: {
-    ready (player) {
-      this.player = player
+    ready (event) {
+      this.player = event.player
     },
-    playing (player) {
+    playing (event) {
       // The player is playing a video.
     },
     change () {
