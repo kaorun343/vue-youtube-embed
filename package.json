@@ -23,6 +23,7 @@
     "YouTube",
     "youtube"
   ],
+  "typings": "./lib/vue-youtube-embed.d.ts",
   "author": "kaorun343",
   "license": "MIT",
   "devDependencies": {
