@@ -19,10 +19,10 @@ export default {
       name: 'VueYouTubeEmbed',
       banner,
       format: 'umd',
-      exports: 'named',
-      plugins: [
-        buble()
-      ]
+      exports: 'named'
     }
+  ],
+  plugins: [
+    buble()
   ]
 }
