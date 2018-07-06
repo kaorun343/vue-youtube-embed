@@ -140,7 +140,7 @@ const app = new Vue({
   },
   methods: {
     ready (event) {
-      this.player = event.player
+      this.player = event.target
     },
     playing (event) {
       // The player is playing a video.
