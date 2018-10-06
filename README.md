@@ -53,7 +53,7 @@ These are available props.
 
 * `player-width`: `String` or `Number`, default value is `640`
 * `player-height`: `String` or `Number`, default value is `390`
-* `player-vars`: `Object`, default value is `{start: 0, autoplay: 0}` Can also specify `rel` and `showInfo`
+* `player-vars`: `Object`, default value is `{start: 0, autoplay: 0}` Can also specify `rel`.
 * `video-id`: `String`, `required`
 * `mute`: `Boolean` default value is `false`
 

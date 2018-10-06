@@ -25,9 +25,6 @@ export default {
         start: 60
       },
       player3: {
-        showinfo: 0
-      },
-      player4: {
         playlist: 'M7lc1UVf-VE,M7lc1UVf-VE,M7lc1UVf-VE'
       }
     }
