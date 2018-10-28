@@ -9,7 +9,7 @@ window.app = new Vue({
     nextId: '',
     videos: [],
     width: '640',
-    height: '390'
+    height: '360'
   },
   methods: {
     pause: function () {

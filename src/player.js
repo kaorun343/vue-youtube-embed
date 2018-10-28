@@ -6,7 +6,7 @@ export default {
   props: {
     playerHeight: {
       type: [String, Number],
-      default: '390'
+      default: '360'
     },
     playerWidth: {
       type: [String, Number],

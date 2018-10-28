@@ -53,7 +53,7 @@ describe('YouTubePlayer', () => {
 
         assert.equal(vm.videoId, 'videoId')
         assert.equal(vm.playerWidth, '640')
-        assert.equal(vm.playerHeight, '390')
+        assert.equal(vm.playerHeight, '360')
       })
     })
 
