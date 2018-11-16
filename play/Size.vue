@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       title: 'Height and Width',
-      height: 390,
+      height: 360,
       width: 640
     }
   },
