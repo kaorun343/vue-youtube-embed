@@ -56,6 +56,7 @@ These are available props.
 * `player-vars`: `Object`, default value is `{start: 0, autoplay: 0}` Can also specify `rel`.
 * `video-id`: `String`, `required`
 * `mute`: `Boolean` default value is `false`
+* `host`: `String` default value is `https://www.youtube.com`. Can be set to `https://www.youtube-nocookie.com` as well.
 
 ### Methods
 
