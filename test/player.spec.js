@@ -54,6 +54,7 @@ describe('YouTubePlayer', () => {
         assert.equal(vm.videoId, 'videoId')
         assert.equal(vm.playerWidth, '640')
         assert.equal(vm.playerHeight, '360')
+        assert.equal(vm.host, 'https://www.youtube.com')
       })
     })
 
@@ -66,11 +67,12 @@ describe('YouTubePlayer', () => {
           start: 30,
           autoplay: 1
         }
+        const host = 'https://www.youtube-nocookie.com'
 
         const vm = new Vue({
           mixins: [YouTubePlayer],
           propsData: {
-            videoId, playerHeight, playerWidth, playerVars
+            videoId, playerHeight, playerWidth, playerVars, host
           }
         })
         vm.$mount()
@@ -79,6 +81,7 @@ describe('YouTubePlayer', () => {
         assert.equal(vm.playerWidth, playerWidth)
         assert.equal(vm.playerHeight, playerHeight)
         assert.deepEqual(vm.playerVars, playerVars)
+        assert.equal(vm.host, host)
       })
     })
   })
