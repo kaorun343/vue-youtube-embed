@@ -71,7 +71,7 @@ export default {
   },
   mounted () {
     container.register((YouTube) => {
-      const { playerHeight, playerWidth, playerVars, videoId } = this
+      const { playerHeight, playerWidth, playerVars, videoId, host } = this
 
       this.player = new YouTube.Player(this.elementId, {
         height: playerHeight,
