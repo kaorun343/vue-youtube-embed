@@ -22,6 +22,10 @@ export default {
     mute: {
       type: Boolean,
       default: false
+    },
+    host: {
+      type: String,
+      default: 'https://www.youtube.com'
     }
   },
   render (h) {
@@ -74,6 +78,7 @@ export default {
         width: playerWidth,
         playerVars,
         videoId,
+        host,
         events: {
           onReady: (event) => {
             this.setMute(this.mute)
