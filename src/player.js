@@ -3,6 +3,7 @@ import container from './container'
 let pid = 0
 
 export default {
+  name: 'YoutubeEmbed',
   props: {
     playerHeight: {
       type: [String, Number],
