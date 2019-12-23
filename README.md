@@ -34,6 +34,8 @@ Vue.use(VueYouTubeEmbed)
 Vue.use(VueYouTubeEmbed, { global: false })
 // if you want to install the component globally with a different name
 Vue.use(VueYouTubeEmbed, { global: true, componentId: "youtube-media" })
+// if you want to start the youtube player library at a later point
+Vue.use(VueYouTubeEmbed, { defer: Promise.resolve() })
 ```
 
 ## Usage
