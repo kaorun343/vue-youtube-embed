@@ -41,7 +41,7 @@ describe('getIdFromURL', () => {
 })
 
 // fork from https://github.com/brandly/angular-youtube-embed
-describe('getTimeFromURL', () => {
+describe('getTimeFromURL with time short hand ("t")', () => {
   it('should return 0 when time is not defined', () => {
     const url = 'https://www.youtube.com/watch?v=3MteSlpxCpo'
     assert.equal(getTimeFromURL(url), 0)
@@ -64,6 +64,28 @@ describe('getTimeFromURL', () => {
 
   it('should handle the url that does not contain both "s" and "s"', () => {
     const url = 'https://www.youtube.com/watch?v=3MteSlpxCpo&feature=youtu.be&t=4'
+    assert.equal(getTimeFromURL(url), 4)
+  })
+})
+
+describe('getTimeFromURL with "time_continue"', () => {
+  it('should handle the url that contains "m" and "s"', () => {
+    const url = 'https://www.youtube.com/watch?v=3MteSlpxCpo&feature=youtu.be&time_continue=4m20s'
+    assert.equal(getTimeFromURL(url), 20 + 4 * 60)
+  })
+
+  it('should handle the url that does not contain "s"', () => {
+    const url = 'https://www.youtube.com/watch?v=3MteSlpxCpo&feature=youtu.be&time_continue=4m'
+    assert.equal(getTimeFromURL(url), 4 * 60)
+  })
+
+  it('should handle the url that does not contain "m"', () => {
+    const url = 'https://www.youtube.com/watch?v=3MteSlpxCpo&feature=youtu.be&time_continue=4s'
+    assert.equal(getTimeFromURL(url), 4)
+  })
+
+  it('should handle the url that contains "time_continue" instead of the short "t"', () => {
+    const url = 'https://www.youtube.com/watch?v=3MteSlpxCpo&feature=youtu.be&time_continue=4'
     assert.equal(getTimeFromURL(url), 4)
   })
 })
