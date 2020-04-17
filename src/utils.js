@@ -9,7 +9,7 @@ if (!String.prototype.includes) {
 }
 
 const youtubeRegexp = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\S*[^\w\s-])([\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig
-const timeRegexp = /t=(\d+)[ms]?(\d+)?s?/
+const timeRegexp = /(?:t|time_continue)=(\d+)[ms]?(\d+)?s?/
 
 /**
  * get id from url
@@ -47,8 +47,10 @@ export function getTimeFromURL (url = '') {
     return 0
   }
 
-  const [full] = times
+  let [full] = times
   let [, minutes, seconds] = times
+
+  full = full.replace('time_continue', 't')
 
   if (typeof seconds !== 'undefined') {
     seconds = parseInt(seconds, 10)
